@@ -1,0 +1,48 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A/B Price Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1 class="title">Special Offer 🎉</h1>
+
+            {% if variant == "A" %}
+                <p class="price">₹499 <span class="tag">only</span></p>
+            {% else %}
+                <p class="price">₹500</p>
+            {% endif %}
+
+            <!-- Add to Cart form -->
+            <form method="POST" action="/">
+                <input type="hidden" name="variant" value="{{ variant }}">
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thank you popup (not used now, optional for styling) -->
+    <div id="popup" class="popup" style="display:none;">
+        <div class="popup-content">
+            <h2>✅ Thank you!</h2>
+            <p>Your item has been added to cart.</p>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+</body>
+</html>
